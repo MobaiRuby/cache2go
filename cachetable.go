@@ -46,6 +46,13 @@ func (table *CacheTable) Count() int {
 	return len(table.items)
 }
 
+// Items returns all items in cache table
+func (table *CacheTable) Items() map[interface{}]*CacheItem {
+	table.RLock()
+	defer table.RUnlock()
+	return table.items
+}
+
 // Foreach all items
 func (table *CacheTable) Foreach(trans func(key interface{}, item *CacheItem)) {
 	table.RLock()
